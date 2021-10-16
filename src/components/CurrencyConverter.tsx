@@ -15,14 +15,6 @@ export function CurrencyConverter({ initialCurrency }: Props) {
     setState((state) => ({ ...state, currency: initialCurrency }));
   }, [initialCurrency]);
 
-  if (currencies.isLoading) {
-    return <>'...'</>;
-  }
-
-  if (!currencies.data) {
-    return <>No Data</>;
-  }
-
   return (
     <div>
       <Formik initialValues={state} onSubmit={(values) => setState(values)}>
@@ -39,7 +31,7 @@ export function CurrencyConverter({ initialCurrency }: Props) {
               as="select"
               className="rounded-2xl border-gray-200"
             >
-              {Object.entries(currencies.data).map(([symbol, currency]) => (
+              {Object.entries(currencies.data!).map(([symbol, currency]) => (
                 <option value={symbol}>{symbol}</option>
               ))}
             </Field>
@@ -55,7 +47,7 @@ export function CurrencyConverter({ initialCurrency }: Props) {
       <div className="text-2xl font-bold mt-4">
         {formatAsCurrency(state.value, 'CZK')} ={' '}
         {formatAsCurrency(
-          state.value / currencies.data[state.currency].rate,
+          state.value / currencies.data![state.currency].rate,
           state.currency
         )}
       </div>

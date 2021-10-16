@@ -8,14 +8,6 @@ interface Props {
 export function CurrencyList({ onCurrencyClick }: Props) {
   const currencies = useCurrencyList();
 
-  if (currencies.isLoading) {
-    return <>'...'</>;
-  }
-
-  if (!currencies.data) {
-    return <>No Data</>;
-  }
-
   return (
     <div className="mt-16 flex flex-col items-center">
       <div>
@@ -24,7 +16,7 @@ export function CurrencyList({ onCurrencyClick }: Props) {
             <li key={currency}>
               {currency}:{' '}
               <span className="font-bold">
-                {formatAsCurrency(currencies.data[currency].rate, 'CZK')}
+                {formatAsCurrency(currencies.data![currency].rate, 'CZK')}
               </span>
             </li>
           ))}
